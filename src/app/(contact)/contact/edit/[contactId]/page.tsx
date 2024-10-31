@@ -6,12 +6,12 @@ import { useContactGroupEdit } from '@/app/(contact)/hooks/useContactGroup';
 import ContactForm from '@/app/(contact)/components/ContactForm';
 
 interface EditContactGroupProps {
-  params: Record<string, string>; // Adjusted to use Record for params
+  params: {
+    contactId: string;
+  }
 }
 
 const EditContactGroup: FC<EditContactGroupProps> = ({ params }): ReactElement => {
-  const contactId = params.contactId;
-
   const {
     isPending,
     notificationGroup,
@@ -20,8 +20,8 @@ const EditContactGroup: FC<EditContactGroupProps> = ({ params }): ReactElement =
     setNotificationGroup,
     setEmails,
     setItemInput,
-    onHandleSubmit,
-  } = useContactGroupEdit(contactId);
+    onHandleSubmit
+  } = useContactGroupEdit(params.contactId);
 
   return (
     <>
@@ -40,7 +40,7 @@ const EditContactGroup: FC<EditContactGroupProps> = ({ params }): ReactElement =
         />
       )}
     </>
-  );
-};
+  )
+}
 
 export default EditContactGroup;
